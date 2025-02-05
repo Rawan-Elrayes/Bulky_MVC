@@ -1,7 +1,13 @@
+using Bulky.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//usesqlsrever(Retreiving the connection string) , dbcntext configured on class ApplicationDbContext .
+
 
 var app = builder.Build();
 
@@ -21,7 +27,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-	name: "default",
+	name: "default", //default pattern
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

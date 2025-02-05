@@ -1,0 +1,46 @@
+﻿@model Category //create new empty object
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h1>Create Category</h1>
+		</div>
+		<!-- asp-validation-summary: to list all erroe messages in the same place
+			all:show all error messages
+			ModelOnly:show only error messges that happened
+			none: dont show any error messages
+		-->
+		<div asp-validation-summary="ModelOnly"></div>
+		<div class="row mb-3 p-1">
+			<!-- asp-for tag helper: instead of title and type
+			-->
+			<label asp-for="Name" class="p-0"></label>
+			<input asp-for="Name" class="fore-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="row mb-3 p-1">
+			<label asp-for="DisplayOrder" class="p-0"></label>
+			<input asp-for="DisplayOrder" class="fore-control" />
+			<span asp-validation-for="DisplayOrder" class="text-danger"></span>
+		</div>
+		<div class="row">
+			<div class="col-6 col-md-3">
+				<button type="submit" class="btn btn-primary form-control">Create</button>
+			</div>
+			<div class="col-6 col-md-3">
+				<a asp-controller="Category" asp-action="Index" class="btn btn-secondary form-control border">Back To List</a>
+			</div>
+
+		</div>
+	</div>
+</form>
+
+<!--
+	to make validations checked in the browser automaticall
+and only the custom validations need the server to be checked
+, we can use JS here which any partial existed by default in the shared folder uisng JS code for client-side validation-->
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
